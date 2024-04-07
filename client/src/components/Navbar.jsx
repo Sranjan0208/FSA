@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <div className="px-10 py-6">
       <Link to="/">
-        <img src={Dribbble} className="w-[90px] h-[60px] cursor-pointer" />
+        <img src={Dribbble} className="w-[90px] h-[30px] cursor-pointer" />
       </Link>
     </div>
   );

@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className="px-3 pt-3 pb-2 flex justify-between border-b">
       <div className="flex items-center space-x-6">
         <Link to="/">
-          <img src={Dribbble} className="w-[90px] h-[60px] cursor-pointer" />
+          <img src={Dribbble} className="w-[90px] h-[30px] cursor-pointer" />
         </Link>
         <a className="text-sm font-bold text-gray-500">Inspiration</a>
         <a className="text-sm font-bold text-gray-500">Find Work</a>
