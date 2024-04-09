@@ -1,0 +1,16 @@
+{
+  "name": "assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd server && pnpm install",
+    "start-server": "cd server && node index.js",
+    "install-client": "cd client && pnpm install",
+    "build-client": "cd client && pnpm run build",
+    "start-client": "cd client && pnpm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
