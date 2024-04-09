@@ -11,7 +11,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "https://dribbble-clone.onrender.com/",
+    origin: [
+      "https://dribbble-clone.onrender.com/",
+      " https://fsa-e746.onrender.com/",
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
