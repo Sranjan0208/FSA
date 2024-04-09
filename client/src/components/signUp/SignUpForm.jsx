@@ -46,7 +46,7 @@ const SignUpForm = () => {
         <p className="text-2xl font-extrabold mt-3 mb-7 ">
           Sign Up to Dribbble
         </p>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 mb-5">{error}</p>}
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className="flex space-x-7  mb-8">
             <div className="flex flex-col">

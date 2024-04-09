@@ -91,6 +91,8 @@ const UserForm = () => {
           <input
             className="outline-none py-2 mb-7 border-b"
             placeholder="Enter a location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
           />
 
           <button

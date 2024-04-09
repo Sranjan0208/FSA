@@ -1,7 +1,6 @@
-// routes/updateProfile.js
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users.model");
+const User = require("../models/users.model.js");
 
 // Update user profile
 router.put("/update-profile", async (req, res) => {

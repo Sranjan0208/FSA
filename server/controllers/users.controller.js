@@ -1,7 +1,9 @@
 const User = require("../models/users.model");
 const { createSecretToken } = require("../utils/users.util");
-const bcrypt = require("bcryptjs");
-const validator = require("validator");
+const { compare } = require("bcryptjs");
+const { isEmail } = require("validator");
+require("dotenv").config();
+const { Resend } = require("resend");
 
 // Signup
 module.exports.Signup = async (req, res, next) => {
@@ -22,7 +24,7 @@ module.exports.Signup = async (req, res, next) => {
     }
 
     // Email validation
-    if (!email || !validator.isEmail(email)) {
+    if (!email || !isEmail(email)) {
       errors.email = "Invalid email address";
     }
 
@@ -49,6 +51,35 @@ module.exports.Signup = async (req, res, next) => {
     }
 
     const user = await User.create({ name, username, email, password });
+
+    const resend = new Resend(process.env.EMAIL_SECRET);
+
+    const subject = "Welcome to Dribbble!";
+    const htmlContent = `
+      <p>Dear ${name},</p>
+      <p>Thank you for signing up and joining Dribbble!</p>
+      <p>We're excited to have you as part of our community.</p>
+      <p>Start exploring, sharing your work, and connecting with other creatives!</p>
+      <p>Best regards,</p>
+      <p>The Dribbble Team</p>
+    `;
+
+    try {
+      await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: email,
+        subject: subject,
+        html: htmlContent,
+      });
+      console.log("Email sent successfully");
+    } catch (error) {
+      console.error("Error sending email:", error);
+
+      return res
+        .status(500)
+        .json({ message: "Failed to send verification email" });
+    }
+
     const token = createSecretToken(user._id);
 
     res.cookie("token", token, {
@@ -62,6 +93,7 @@ module.exports.Signup = async (req, res, next) => {
       .json({ message: "User created successfully", success: true, user });
     next();
   } catch (error) {
+    console.error("Error during signup:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -74,7 +106,7 @@ module.exports.Login = async (req, res, next) => {
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
