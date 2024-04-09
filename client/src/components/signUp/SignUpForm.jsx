@@ -20,7 +20,7 @@ const SignUpForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/", user);
+      const response = await axios.post("https://fsa-e746.onrender.com/", user);
 
       if (response.status === 201) {
         console.log(response.data);
