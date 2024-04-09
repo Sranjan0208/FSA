@@ -14,6 +14,7 @@ app.use(
     origin: [
       "https://dribbble-clone.onrender.com/",
       " https://fsa-e746.onrender.com/",
+      "*",
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
